@@ -61,7 +61,7 @@ function create_changed_file()
     file="$1"
     short_file_name=$( basename $file )
     tmpdir
-    git show $commit:$file >$TMP_DIR/$short_file_name
+    git show $newrev:$file >$TMP_DIR/$short_file_name
     echo "$TMP_DIR/$short_file_name"
 }
 
