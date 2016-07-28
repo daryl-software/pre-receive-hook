@@ -15,14 +15,9 @@ Installation scripts are provided in install_scripts/ folder.
 First you must clone this repository somewhere. Some minor dependencies must be present on system that will run pre-receive hook (for instance, a GitLab docker image.)
 
 - coreutils
+- python
+- perl/php for syntax checks
 
-
-### Add it to an existing pre-receive hook
-
-Simply call it, append it to your existing pre-receive hook:
-```
-
-```
 
 ### gitolite
 

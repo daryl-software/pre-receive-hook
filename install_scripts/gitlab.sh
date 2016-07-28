@@ -18,10 +18,22 @@ gitlab="$1"
 find $gitlab/repositories/ -maxdepth 2 -type d -name "*.git" | while read folder
 do
     repo=$( basename $folder .git )
+
+    # skip wiki repositories
+    if grep -qE '\.wiki$' <<< "$repo"
+    then
+        continue
+    fi
+    #debug
+    if ! grep -q greg <<< $folder
+    then
+        continue
+    fi
+
     test -d $folder/custom_hooks || mkdir $folder/custom_hooks
     if [ -e $folder/custom_hooks/pre-receive ]
     then
-        if diff -q pre-receive $folder/custom_hooks/pre-receive
+        if ! diff -q pre-receive $folder/custom_hooks/pre-receive
         then
             echo "[UPDATE] pre-receive hook to repository '$repo'"
         else
