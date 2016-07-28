@@ -29,5 +29,5 @@ then
     fi
 fi
 
-cp -vf pre-receive $prereceivehook
+eval cp -vf pre-receive $prereceivehook
 
