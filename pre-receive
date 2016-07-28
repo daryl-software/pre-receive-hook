@@ -220,6 +220,7 @@ do
 	# in a sub-shell ...
 
 	invalids=0
+    test -d $TMPTOOLS || mkdir -p $TMPTOOLS
 
 	for commit in $( git rev-list ${oldrev}..${newrev} )
 	do
