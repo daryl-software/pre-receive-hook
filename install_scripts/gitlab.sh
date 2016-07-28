@@ -24,11 +24,6 @@ do
     then
         continue
     fi
-    #debug
-    if ! grep -q greg <<< $folder
-    then
-        continue
-    fi
 
     test -d $folder/custom_hooks || mkdir $folder/custom_hooks
     if [ -e $folder/custom_hooks/pre-receive ]
