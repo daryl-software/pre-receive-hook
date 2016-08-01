@@ -222,6 +222,12 @@ do
 	invalids=0
     test -d $TMPTOOLS || mkdir -p $TMPTOOLS
 
+    # ugly hook that works in this specific case...
+    if [ "$oldrev" = "$NULL_SHA1" ]
+    then
+        oldrev="$newrev^"
+    fi
+
 	for commit in $( git rev-list ${oldrev}..${newrev} )
 	do
 		for filename in $( git diff --name-only $commit^..$commit )
