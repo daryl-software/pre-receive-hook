@@ -17,6 +17,7 @@ PHPCS_REPORT="diff"
 PHPCS_ENCODING="utf-8"
 
 CHKCRONTAB_GIT="https://github.com/gregorg/chkcrontab"
+CHKCRONTAB_ARGS="-w ejabberd -w ezwww -w www-data -w nobody"
 NULL_SHA1="0000000000000000000000000000000000000000" # 40 0's
 UPTODATE_RUNNED=0
 DEBUG=0
@@ -125,7 +126,7 @@ function validate_crontab()
     fi
 
     local changed_file=$( create_changed_file "$1" )
-    if ! $CHKCRONTAB $changed_file
+    if ! $CHKCRONTAB $CHKCRONTAB_ARGS $changed_file
     then
         error "$filename doesn't pass crontab check."
     fi
