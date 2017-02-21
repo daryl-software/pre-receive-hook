@@ -239,7 +239,7 @@ do
 			if grep -F /crontab <<< "$filename"
 			then
                 validate_crontab $filename
-            elif [ "$extension" = "php" ]
+            elif [ "$extension" = "php4" ]
             then
                 validate_php $filename
             elif [ "$extension" = "pl" ] || [ "$extension" = "py" ]
