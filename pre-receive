@@ -242,7 +242,7 @@ do
             elif [ "$extension" = "php4" ]
             then
                 validate_php $filename
-            elif [ "$extension" = "pl" ] || [ "$extension" = "py" ]
+            elif [ "$extension" = "perl" ] || [ "$extension" = "py" ]
             then
                 validate_script $extension $filename
 			fi
