@@ -148,23 +148,23 @@ function validate_php()
         return 0
     fi
 
-    PHPCS=$TMPTOOLS/phpcs.phar
-    if [ ! -e $PHPCS ]
-    then
-        debug "Fetch phpcs ..."
-        curl -so $PHPCS -L https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar
-    fi
-    if [ -e $PHPCS ]
-    then
-        debug "run phpcs ..."
-        if ! php $PHPCS -n --colors --encoding=${PHPCS_ENCODING} --report=${PHPCS_REPORT} --standard=${PHPCS_STANDARD} $changed_file
-        then
-            # still some works to do, do not report an error, yet...
-            warn "PHPCS check doesn't pass."
-        fi
-    else
-        echo "(phpCS is not available, check skipped.)"
-    fi
+    #PHPCS=$TMPTOOLS/phpcs.phar
+    #if [ ! -e $PHPCS ]
+    #then
+    #    debug "Fetch phpcs ..."
+    #    curl -so $PHPCS -L https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar
+    #fi
+    #if [ -e $PHPCS ]
+    #then
+    #    debug "run phpcs ..."
+    #    if ! php $PHPCS -n --colors --encoding=${PHPCS_ENCODING} --report=${PHPCS_REPORT} --standard=${PHPCS_STANDARD} $changed_file
+    #    then
+    #        # still some works to do, do not report an error, yet...
+    #        warn "PHPCS check doesn't pass."
+    #    fi
+    #else
+    #    echo "(phpCS is not available, check skipped.)"
+    #fi
 }
 
 
@@ -179,7 +179,7 @@ function validate_script()
         checker_opts="-c"
     elif [ "$1" = "py" ]
     then
-        checker=python
+        checker=python3
         checker_opts="-m py_compile"
     fi
 
@@ -192,16 +192,6 @@ function validate_script()
     if ! eval "$checker $checker_opts \"$changed_file\""
     then
         error "$filename doesn't pass $checker syntax check."
-    fi
-}
-
-
-function validate_python()
-{
-    local changed_file=$( create_changed_file "$1" )
-    if ! python -m py_compile "$changed_file"
-    then
-        error "$filename doesn't pass Python syntax check."
     fi
 }
 
@@ -239,10 +229,10 @@ do
 			if grep -F /crontab <<< "$filename"
 			then
                 validate_crontab $filename
-            elif [ "$extension" = "php4" ]
+            elif [ "$extension" = "php" ]
             then
                 validate_php $filename
-            elif [ "$extension" = "perl" ] || [ "$extension" = "py" ]
+            elif [ "$extension" = "pl" ] || [ "$extension" = "py" ]
             then
                 validate_script $extension $filename
 			fi
