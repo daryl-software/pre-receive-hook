@@ -128,7 +128,10 @@ function validate_crontab()
     local changed_file=$( create_changed_file "$1" )
     if ! $CHKCRONTAB $CHKCRONTAB_ARGS $changed_file
     then
-        error "$filename doesn't pass crontab check."
+        if ! $CHKCRONTAB $CHKCRONTAB_ARGS -u $changed_file
+        then
+            error "$filename doesn't pass crontab check."
+        fi
     fi
 }
 
