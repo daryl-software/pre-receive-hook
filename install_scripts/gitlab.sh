@@ -15,7 +15,7 @@ fi
 
 gitlab="$1"
 
-find $gitlab/repositories/ -maxdepth 2 -type d -name "*.git" | while read folder
+find $gitlab/repositories/@hashed/ -maxdepth 3 -type d -name "*.git" | while read folder
 do
     repo=$( basename $folder .git )
 
