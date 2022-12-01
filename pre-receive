@@ -17,27 +17,10 @@ echo "RUN pre-receive hook (https://github.com/ezweb/pre-receive-hook)"
 function error()
 {
     echo ""
-    echo -e "\033[31m ================================================================ \033[0m"
-    echo -e "\033[31m =                          ERROR !!!                           = \033[0m"
-    echo -e "\033[31m ================================================================ \033[0m"
-    echo ""
-    echo -e "\033[31m ERROR: $@ \033[0m"
+    echo -e "\033[31m 💥 ERROR 💥  $@ \033[0m"
     echo ""
 
-    cleanup
     exit 3
-}
-
-
-function warn()
-{
-    echo ""
-    echo -e "\033[1;31m\033[43m ================================================================ \033[0m"
-    echo -e "\033[1;31m\033[43m =                        WARNING !!!                           = \033[0m"
-    echo -e "\033[1;31m\033[43m ================================================================ \033[0m"
-    echo ""
-    echo -e "\033[1;31m\033[43m >>> $@ \033[0m"
-    echo ""
 }
 
 
@@ -66,8 +49,7 @@ do
     base=$(git merge-base $oldrev $newrev);
     if [ "$base" != "$oldrev" ] ; then
         # non fast forward merge
-        echo "💥 Force pushing of $ref is forbidden 🤬";
-        exit 5;
+        error "Force pushing of $ref is forbidden 🤬";
     fi
 done
 
