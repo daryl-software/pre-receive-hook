@@ -46,6 +46,12 @@ do
         continue;
     fi
 
+    # Allow Gitlab online rebase
+    if grep -q master-patch <<< $ref
+    then
+        continue
+    fi
+
     base=$(git merge-base $oldrev $newrev);
     if [ "$base" != "$oldrev" ] ; then
         # non fast forward merge
