@@ -53,7 +53,9 @@ do
     fi
 
     base=$(git merge-base $oldrev $newrev);
-    if [ "$base" != "$oldrev" ] ; then
+
+    if [ "$base" != "$oldrev" ] &&  echo $ref | grep -vq "renovate/"
+    then
         # non fast forward merge
         error "Force pushing of $ref is forbidden 🤬";
     fi
