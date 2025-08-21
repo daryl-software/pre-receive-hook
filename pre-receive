@@ -11,7 +11,7 @@ TMP_DIR=
 
 TMPTOOLS=/tmp/check_tools
 
-echo "RUN pre-receive hook (https://github.com/ezweb/pre-receive-hook)"
+echo "RUN pre-receive hook (https://github.com/daryl-software/pre-receive-hook)"
 
 
 function error()
